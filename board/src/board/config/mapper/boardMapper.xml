@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="board.config.boardMapper">
+<mapper namespace="board.config.mapper.boardMapper">
+
+	<resultMap type="Board" id="board-resultmap">
+		<id column="board_id" property="boardId" />
+		<result column="board_title" property="boardTitle" />
+		<result column="board_date" property="boardDate" />
+		<result column="board_content" property="boardContent" />
+		<result column="board_score" property="boardScore"/>
+		<result column="board_reference" property="boardReference"/>
+		<result column="member_id" property="memberId"/>
+		<result column="movie_id" property="movieId"/>
+	</resultMap>
 	
+	<insert id = "insertBoard" parameterType="board">
+		INSERT INTO board
+		VALUES(#{boardId},#{boardTitle},#{boardDate},#{boardContent},#{boardScore},#{boardReference},#{memberId},#{movieId})
+	</insert>
 
 </mapper>

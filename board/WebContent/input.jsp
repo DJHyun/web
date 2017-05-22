@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h2>게시판 등록</h2>
-		<form action="/board/register" method="post">
+		<form action="/board/board" method="post">
 			영화 : <input type="text" name="movie"/><br>
 			평점 : <input type="number" name="score" max="5" min="0"/><br>
 			제목 : <input type="text" name="title"/><br>
