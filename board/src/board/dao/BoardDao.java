@@ -45,7 +45,7 @@ public interface BoardDao {
 	 * @param session
 	 * @return
 	 */
-	List<Board> selectBoard(SqlSession session);
+	List<Board> selectBoardById(SqlSession session, int boardId);
 	
 	/**
 	 * 
