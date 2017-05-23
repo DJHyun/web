@@ -13,9 +13,61 @@
 		<result column="movie_id" property="movieId"/>
 	</resultMap>
 	
-	<insert id = "insertBoard" parameterType="board">
+	<insert id = "insertBoard123" parameterType="board">
 		INSERT INTO board
 		VALUES(#{boardId},#{boardTitle},#{boardDate},#{boardContent},#{boardScore},#{boardReference},#{memberId},#{movieId})
 	</insert>
+	
+	<insert id="insertBoard" parameterType="board">
+	<!--
+		selectKey : insert시 사용할 parameter값을 조회하는 SQL문을 넣는 태그로 insert 태그의 하위태그로 사용된다. 주로 자동증가하는 값 관련 처리를 한다. \
+		속성 : resultType - 조회결과 타입
+			 keyProperty - select결과를 넣을 parameter객체의 attribute명(setter)
+			 order : selectKey 실행을 insert 전(BEFORE)에 할지 후(AFTER-기본)에 할지 설정
+	-->
+		<selectKey resultType = "int" keyProperty = "boardId" order="BEFORE">
+			SELECT board_id_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO board
+		VALUES(#{boardId},#{boardTitle},#{boardDate},#{boardContent},#{boardScore},#{boardReference},#{memberId},#{movieId})
+	</insert>
+	
+	<update id = "updateBoard" parameterType="Board">
+		UPDATE Board
+		SET Board_id = #{BoardId}, Board_title = #{BoardTitle}, Board_date =#{BoardDate}, Board_content = #{BoardContent}, Board_score=#{BoardScore},
+		Board_reference = #{BoardReference}, member_id =#{memberId}, movie_id=#{movieId}
+		WHERE Board_id = #{BoardId}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+	DELETE FROM Board
+	WHERE Board_id = #{value}
+	</delete>
+	
+	<select id="selectBoard" resultMap="board-resultmap">
+		SELECT board_id boardId, board_title boardTitle, board_date boardDate,
+		board_content boardContent, board_score boardScore, board_reference boardReference,
+		member_id memberId, movie_id movieId
+		FROM board
+		ORDER BY boardId
+	</select>
+	
+	<select id="selectBoardCount" resultType="_int">
+		select count(board_id) from board
+	</select>
+
+	<select id="selectBoardList" parameterType="hashmap" resultMap="board-resultmap">
+		<![CDATA[
+			select board_id, board_title, member_id, board_date, board_reference, board_score
+			from(
+				select rownum rnum, board_id, board_title, member_id, board_date, board_reference, board_score
+				from(
+					select board_id, board_title, member_id, board_date, board_reference, board_score from board order by board_id
+				)
+				where rownum <= ${endItemNum}
+			)
+			where rnum >= ${beginItemNum}
+		]]>
+	</select>
 
 </mapper>

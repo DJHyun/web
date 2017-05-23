@@ -38,14 +38,14 @@ public interface BoardDao {
 	 * @param board
 	 * @return
 	 */
-	int deleteBoard(SqlSession session, Board board);
+	int deleteBoard(SqlSession session, int boardId);
 	
 	/**
 	 * 게시판 조회 메소드
 	 * @param session
 	 * @return
 	 */
-	List<Board> selectBoardList(SqlSession session);
+	List<Board> selectBoard(SqlSession session);
 	
 	/**
 	 * 
@@ -54,7 +54,7 @@ public interface BoardDao {
 	 * @param endItemNo : 보려는 페이지의 마지막 item 번호
 	 * @return
 	 */
-	List<Board> selectPagingList(SqlSession session, int beginItemNo, int endItemNo);
+	List<Board> selectBoardList(SqlSession session, int beginItemNo, int endItemNo);
 
 	/**
 	 * item_tb의 총 레코드 수를 조회

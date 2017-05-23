@@ -1,5 +1,6 @@
 package board.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,15 +9,22 @@ import board.dao.BoardDao;
 import board.vo.Board;
 
 public class BoardDaoImpl implements BoardDao{
-	private static BoardDaoImpl daoImpl = new BoardDaoImpl();
+	private static BoardDaoImpl instance = new BoardDaoImpl();
 	public static BoardDaoImpl getInstance(){
-		return daoImpl;
+		if(instance == null){
+			instance = new BoardDaoImpl();
+		}
+		return instance;
 	}
 	private BoardDaoImpl(){}
 	
+	private String makeSql(String sqlId){
+		return "board.config.mapper.boardMapper."+sqlId;
+	}
+
 	@Override
 	public int insertBoard(SqlSession session, Board board) {
-		return session.insert("board.config.mapper.boardMapper.insertBoard",board);
+		return session.insert(makeSql("insertBoard"),board);
 	}
 
 	@Override
@@ -27,32 +35,30 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public int updateBoard(SqlSession session, Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.update(makeSql("updateBoard"),board);
 	}
 
 	@Override
-	public int deleteBoard(SqlSession session, Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteBoard(SqlSession session, int boardId) {
+		return session.delete(makeSql("deleteBoard"),boardId);
 	}
 
 	@Override
-	public List<Board> selectBoardList(SqlSession session) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> selectBoard(SqlSession session) {
+		return session.selectList(makeSql("selectBoard"));
 	}
 
 	@Override
-	public List<Board> selectPagingList(SqlSession session, int beginItemNo, int endItemNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> selectBoardList(SqlSession session, int beginItemNo, int endItemNo) {
+		HashMap<String, Object> param = new HashMap<>();
+		param.put("beginItemNum", beginItemNo);
+		param.put("endItemNum", endItemNo);
+		return session.selectList(makeSql("selectBoardList"),param);
 	}
 
 	@Override
 	public int selectBoardCount(SqlSession session) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.selectOne(makeSql("selectBoardCount"));
 	}
 	
 }

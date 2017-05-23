@@ -14,12 +14,22 @@
 	</welcome-file-list>
 
 	<servlet>
-		<servlet-name>board</servlet-name>
-		<servlet-class>board.controller.ListController</servlet-class>
+		<servlet-name>InsertController</servlet-name>
+		<servlet-class>board.controller.InsertController</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>register</servlet-name>
-		<url-pattern>/board</url-pattern>
+		<servlet-name>InsertController</servlet-name>
+		<url-pattern>/InsertController</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SelectController</servlet-name>
+		<servlet-class>board.controller.SelectController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SelectController</servlet-name>
+		<url-pattern>/SelectController</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

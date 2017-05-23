@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h2>게시판 등록</h2>
-		<form action="/board/board" method="post">
+		<form action="/board/InsertController" method="post">
 			영화 : <input type="text" name="movie"/><br>
 			평점 : <input type="number" name="score" max="5" min="0"/><br>
 			제목 : <input type="text" name="title"/><br>
@@ -16,7 +16,6 @@
 			<input type="submit" value="등록"/>
 			<input type="reset" value="초기화"/>
 			<input type="button" value="취소" onclick="location.href='/board/index.jsp'"/>
-			<input type="hidden" name="author" value="현동준"/>
-			<input type="hidden" name="time" value="currentTime"/>
+			<input type="hidden" name="memberId" value=12/>
 		</form>
 </body>
