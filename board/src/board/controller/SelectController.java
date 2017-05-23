@@ -28,8 +28,8 @@ public class SelectController extends HttpServlet{
 				Map<String, Object> map = service.getBoardList(page);
 				
 				req.setAttribute("list", map.get("list"));
-				req.setAttribute("pageBean", map.get("pageBean"));
-				req.getRequestDispatcher("/practice.jsp").forward(req,resp);
+				req.setAttribute("boardBean", map.get("pageBean"));
+				req.getRequestDispatcher("/boardView.jsp").forward(req,resp);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

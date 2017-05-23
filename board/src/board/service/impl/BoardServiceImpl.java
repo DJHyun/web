@@ -84,9 +84,16 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public String selectBoardListService() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> selectBoardListService(int boardId) {
+		HashMap<String, Object> map = new HashMap<>();
+		SqlSession session = factory.openSession();
+		try{
+			List<Board> list = dao.selectBoardById(session, boardId);
+			map.put("Info", list);
+			return map;
+		}finally{
+			session.close();
+		}
 	}
 
 	@Override
@@ -106,6 +113,4 @@ public class BoardServiceImpl implements BoardService{
 			session.close();
 		}
 	}
-	
-	
 }

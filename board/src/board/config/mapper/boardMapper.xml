@@ -44,25 +44,25 @@
 	WHERE Board_id = #{value}
 	</delete>
 	
-	<select id="selectBoard" resultMap="board-resultmap">
-		SELECT board_id boardId, board_title boardTitle, board_date boardDate,
-		board_content boardContent, board_score boardScore, board_reference boardReference,
-		member_id memberId, movie_id movieId
+	<select id="selectBoard" resultMap="board-resultmap" parameterType="int">
+		SELECT board_id, board_title, board_date,
+		board_content, board_score, board_reference,
+		member_id, movie_id 
 		FROM board
-		ORDER BY boardId
+		WHERE Board_id =#{value}
 	</select>
 	
 	<select id="selectBoardCount" resultType="_int">
 		select count(board_id) from board
 	</select>
 
-	<select id="selectBoardList" parameterType="hashmap" resultMap="board-resultmap">
+	<select id="selectBoardList" parameterType="map" resultMap="board-resultmap">
 		<![CDATA[
-			select board_id, board_title, member_id, board_date, board_reference, board_score
+			select board_id, board_title, board_date, board_content, board_score, board_reference, member_id, movie_id
 			from(
-				select rownum rnum, board_id, board_title, member_id, board_date, board_reference, board_score
+				select rownum rnum, board_id, board_title, board_date, board_content, board_score, board_reference, member_id, movie_id
 				from(
-					select board_id, board_title, member_id, board_date, board_reference, board_score from board order by board_id
+					select board_id, board_title, board_date, board_content, board_score, board_reference, member_id, movie_id from board order by board_id
 				)
 				where rownum <= ${endItemNum}
 			)

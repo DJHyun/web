@@ -44,7 +44,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<Board> selectBoard(SqlSession session) {
+	public List<Board> selectBoardById(SqlSession session, int boardId) {
 		return session.selectList(makeSql("selectBoard"));
 	}
 

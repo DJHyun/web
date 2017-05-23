@@ -31,7 +31,7 @@ public interface BoardService {
 	 * 조회하는 Sercive
 	 * @return
 	 */
-	String selectBoardListService();
+	Map<String, Object> selectBoardListService(int boardId);
 	
 	/**
 	 * page 기준으로 board들을 조회하는 메소드.

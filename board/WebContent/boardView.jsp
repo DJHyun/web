@@ -30,7 +30,7 @@ table, td{
 }
 table{
 	border-collapse: collapse;
-	width: 500px;
+	width: 700px;
 }
 td{
 	padding: 10px;
@@ -39,7 +39,7 @@ td{
 </head>
 <body>
 <h2>게시판 목록</h2>
-<table border="1" width="500">
+<table>
 	<thead>
 		<tr>
 			<td align="center">게시판 번호</td>
@@ -57,7 +57,7 @@ td{
 		<c:forEach items="${requestScope.list }" var="board">
 			<tr>
 				<td>${board.boardId }</td>
-				<td>${board.boardTitle }</td>
+				<td><a href="/board/SelectBoardInfoController?title=${board.boardTitle }&content=${board.boardContent}&date=${board.boardDate}">${board.boardTitle }</a></td>
 				<td>${board.memberId }</td>
 				<td>${board.boardDate }</td>
 				<td>${board.boardReference }</td>
@@ -72,7 +72,7 @@ td{
 														페이징 처리
 			###################################################### --%>
 	<!-- 첫페이지로 이동 -->
-	<a href="/board/SelectController?page=0">첫 페이지</a>
+	<a href="/board/SelectController?page=1">첫 페이지</a>
 
 	<!--
 		이전 페이지 그룹 처리.
@@ -81,13 +81,12 @@ td{
 		<c:choose>
 			<c:when test="${requestScope.boardBean.previousPageGroup}">
 			<!--이전 페이지 그룹이 있다면 : isPreviousPageGroup()  -->
-			<a href="/board/SelectController?page=${requestScope.boardBean.beginPage-1}">◀</a>
+			<a href="${initParam.rootPath }/SelectController?page=${requestScope.boardBean.beginPage-1}">◀</a>
 			</c:when>
 			<c:otherwise>
 			◀
 			</c:otherwise>
 		</c:choose>
-
 
 
 
@@ -102,7 +101,7 @@ td{
 			<c:choose>
 				<c:when test="${requestScope.boardBean.page != page }">
 					<!--현재 페이지가 아니라면  -->
-					<a href="/board/SelectController?page=${page}">${page }</a>
+					<a href="${initParam.rootPath }/SelectController?page=${page}">${page }</a>
 				</c:when>
 				<c:otherwise>
 					[${page }]&nbsp;
@@ -116,7 +115,7 @@ td{
 	 -->
 	<c:choose>
 			<c:when test="${requestScope.boardBean.nextPageGroup }">
-				<a href="/board/SelectController?page=${requestScope.boardBean.endPage+1}">▶</a>
+				<a href="${initParam.rootPath }/SelectController?page=${requestScope.boardBean.endPage+1}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -125,13 +124,10 @@ td{
 		</c:choose> 
 		
 	<!-- 마지막 페이지로 이동 -->
-	<a href="/board/SelectController?page=${requestScope.boardBean.totalPage}">마지막 페이지</a>
+	<a href="${initParam.rootPath }/SelectController?page=${requestScope.boardBean.totalPage}">마지막 페이지</a>
 
-</p>
-<button onclick="location.href='/board/input.jsp'">글쓰기</button>
-	<c:if test="${requestScope.message } != null">
-		
-	</c:if>
+
+<button onclick="location.href='${initParam.rootPath }/input.jsp'">글쓰기</button>
 </body>
 </html>
 

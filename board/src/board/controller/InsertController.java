@@ -27,7 +27,7 @@ public class InsertController extends HttpServlet {
 		String message = service.InsertBoardService(new Board(1,title,new Date(),content,score,0,memberId,movieId));
 		
 		req.setAttribute("message", message);
-		req.getRequestDispatcher("/practice.jsp").forward(req, resp);
+		req.getRequestDispatcher("/SelectController").forward(req, resp);
 		System.out.println(message);
 	}
 }
