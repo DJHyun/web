@@ -52,14 +52,35 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public String UpdateBoardService(Board board) {
-		// TODO Auto-generated method stub
-		return null;
+		BoardDaoImpl daoImpl = BoardDaoImpl.getInstance();
+		SqlSession session = factory.openSession();
+		try {
+			int cnt = daoImpl.updateBoard(session, board);
+			if(cnt == 0) {
+				return "실패";
+			}
+			session.commit();
+		} finally {
+			session.close();
+		}
+			return "성공";
 	}
 
 	@Override
 	public int deleteBoardService(int boardId) {
-		// TODO Auto-generated method stub
-		return 0;
+		BoardDaoImpl daoImpl = BoardDaoImpl.getInstance();
+		SqlSession session = factory.openSession();
+		int cnt = daoImpl.deleteBoard(session, boardId);
+		try {
+			
+			if(cnt == 0) {
+				return 0;
+			}
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return cnt;
 	}
 
 	@Override

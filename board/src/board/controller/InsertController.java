@@ -31,3 +31,4 @@ public class InsertController extends HttpServlet {
 		System.out.println(message);
 	}
 }
+//뷰 -> 서블릿(controller) -> 서비스 -> daoImpl -> vo(db) -> 
