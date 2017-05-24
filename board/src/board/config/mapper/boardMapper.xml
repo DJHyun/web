@@ -38,7 +38,7 @@
 		Board_reference = #{BoardReference}, member_id =#{memberId}, movie_id=#{movieId}
 		WHERE Board_id = #{BoardId}
 	</update>
-	
+
 	<delete id="deleteBoard" parameterType="int">
 	DELETE FROM Board
 	WHERE Board_id = #{value}
@@ -62,7 +62,8 @@
 			from(
 				select rownum rnum, board_id, board_title, board_date, board_content, board_score, board_reference, member_id, movie_id
 				from(
-					select board_id, board_title, board_date, board_content, board_score, board_reference, member_id, movie_id from board order by board_id
+					select board_id, board_title, board_date, board_content, board_score, board_reference, member_id, movie_id 
+					from board order by board_id
 				)
 				where rownum <= ${endItemNum}
 			)

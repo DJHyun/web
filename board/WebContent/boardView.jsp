@@ -57,7 +57,7 @@ td{
 		<c:forEach items="${requestScope.list }" var="board">
 			<tr>
 				<td>${board.boardId }</td>
-				<td><a href="/board/SelectBoardInfoController?title=${board.boardTitle }&content=${board.boardContent}&date=${board.boardDate}">${board.boardTitle }</a></td>
+				<td><a href="/board/SelectBoardInfoController?id=${board.boardId }&title=${board.boardTitle }&content=${board.boardContent}&date=${board.boardDate}">${board.boardTitle }</a></td>
 				<td>${board.memberId }</td>
 				<td>${board.boardDate }</td>
 				<td>${board.boardReference }</td>

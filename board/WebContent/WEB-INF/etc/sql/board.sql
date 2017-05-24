@@ -29,58 +29,21 @@ create sequence board_id_seq;
 select board_id_seq.nextval FROM dual
 drop sequence board_id_seq;
 
-	select board_id, 
-		   board_title, 
-		   member_id, 
-		   board_date, 
-		   board_reference, 
-		   board_score
-	from(
-		   select rownum rnum, 
-		   		  board_id, 
-		   		  board_title, 
-		   		  member_id, 
-		   		  board_date, 
-		   		  board_reference, 
-		   		  board_score
+	select board_id, board_title, member_id, board_date, board_reference, board_score
 			from(
-					select board_id, 
-						   board_title, 
-						   member_id, 
-						   board_date, 
-						   board_reference, 
-						   board_score 
-				    from board 
-					order by board_id
+				select rownum rnum, board_id, board_title, member_id, board_date, board_reference, board_score
+				from(
+					select board_id, board_title, member_id, board_date, board_reference, board_score from board order by board_id
 				)
-			where rownum <= 10
-			)
-	where rnum >= 1
-			
-select board_id boardId, 
-	   board_title boardTitle, 
-	   member_id memberId, 
-	   board_date boardDate, 
-	   board_reference boardReference, 
-	   board_score boardScore
-from(
-		select rownum rnum, 
-			   board_id boardId, 
-			   board_title boardTitle, 
-			   member_id memberId, 
-			   board_date boardDate, 
-			   board_reference boardReference, 
-			   board_score boardScore
-		from(
-				select board_id boardId, 
-					   board_title boardTitle, 
-					   member_id memberId, 
-					   board_date boardDate, 
-					   board_reference boardReference, 
-					   board_score boardScore 
-			    from board order by boardId
 				where rownum <= 10
 			)
-		where rnum >= 2
+			where rnum >= 1
 			
-select * from movie
+select board_id boardId, board_title boardTitle, member_id memberId, board_date boardDate, board_reference boardReference, board_score boardScore
+			from(
+				select rownum rnum, board_id boardId, board_title boardTitle, member_id memberId, board_date boardDate, board_reference boardReference, board_score boardScore
+				from(
+					select board_id boardId, board_title boardTitle, member_id memberId, board_date boardDate, board_reference boardReference, board_score boardScore from board order by boardId
+				where rownum <= 10
+			)
+			where rnum >= 2

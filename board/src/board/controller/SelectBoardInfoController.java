@@ -17,7 +17,9 @@ public class SelectBoardInfoController extends HttpServlet{
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String date = req.getParameter("date");
+		int id = Integer.parseInt(req.getParameter("id"));
 		
+		req.setAttribute("id", id);
 		req.setAttribute("date", date);
 		req.setAttribute("title", title);
 		req.setAttribute("content", content);

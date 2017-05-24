@@ -25,7 +25,7 @@ public interface BoardService {
 	 * @param boardId
 	 * @return
 	 */
-	int deleteBoardService(int boardId);
+	String deleteBoardService(int boardId);
 	
 	/**
 	 * 조회하는 Sercive

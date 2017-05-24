@@ -45,6 +45,26 @@
 		<servlet-name>SelectBoardInfoController</servlet-name>
 		<url-pattern>/SelectBoardInfoController</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModifyController</servlet-name>
+		<servlet-class>board.controller.ModifyController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModifyController</servlet-name>
+		<url-pattern>/ModifyController</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteController</servlet-name>
+		<servlet-class>board.controller.DeleteController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteController</servlet-name>
+		<url-pattern>/DeleteController</url-pattern>
+	</servlet-mapping>
+	
+	
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
